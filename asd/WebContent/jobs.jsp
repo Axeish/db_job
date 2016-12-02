@@ -18,9 +18,11 @@
 
 <%!
 public class NewJob{
-	String URL = "jdbc:mysql://localhost:3306/jobPortal";
+
+	String URL = "jdbc:mysql://localhost:3306/jobportal";
+
 	String USERNAME="root";
-	String PASS= "Amma@123";
+	String PASS= "root";
 	Connection conn=null;
 	PreparedStatement insertnjob =null;
 	ResultSet rs=null;
@@ -119,7 +121,7 @@ result = jobs.setJobs(jid, postedby,title, datePosted,jobDetail,jobLocation);
 	<input type="submit" value="submit" name="submit1">
 
 </form>
-	<a href="recruiter.jsp?email=<%=email_id%>">GoBackHome</a>
-	<a href="recruiter.jsp?email=<%=email_id%>">Viewjobs</a>
+	<a href="recruiter.jsp?email=<%=email_id%>">GoBackHome</a><br>
+	   <a href="applicants.jsp?id=<%=postedby%>&email=<%=email_id%>">View all Applicants of jobs posted by me </a>
 </body>
 </html>
