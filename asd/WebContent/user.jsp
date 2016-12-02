@@ -14,8 +14,25 @@
 	Class.forName("com.mysql.jdbc.Driver"); 
 	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","root"); 
 	Statement st= con.createStatement(); 
-	ResultSet rs=st.executeQuery("select * from user where email_id='" + email + "'"); 
+	ResultSet rs=st.executeQuery("select * from user where email_id='" + request.getParameter("email") + "'"); 
+	if(rs.next()) 
+	{   %>
+	<h3> Hi, <%= rs.getString("name") %></h3><br>
+		<p> Welcome to JobGrabber <p><br><hr>
+	<h5>Your profile details:</h5>
+	<table>
+	<tr><td>Name: </td> <td><%= rs.getString("name") %></td></tr>
+	<tr><td>Email: </td> <td><%= rs.getString("email_id") %></td></tr>
+	<tr><td>Gender: </td> <td><%= rs.getString("gender") %></td></tr>
+	<tr><td>Date of Birth: </td> <td><%= rs.getString("dateofbirth") %></td></tr>
+	
+	</table>	
+	
+
+	<%	
+	}
 	%>
 <h1>hi you are ${email}</h1>
+
 </body>
 </html>

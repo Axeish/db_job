@@ -22,22 +22,63 @@ public class Jobs{
 	String USERNAME="root";
 	String PASS= "root";
 	Connection conn=null;
-	PreparedStatement insertjob =null;
+	PreparedStatement insertuser =null;
+	PreparedStatement insertjobSeeker =null;
+	PreparedStatement insertrecruiter =null;
+	PreparedStatement selectUser =null;
 	ResultSet rs=null;
 	
 	public Jobs(){
 		try {
 			conn =DriverManager.getConnection(URL,USERNAME,PASS);
-			insertjob= conn.prepareStatement(
+			
+			insertuser= conn.prepareStatement(
 					"INSERT INTO `user`"
 					+"(`name`,`password`,`email_id`,`gender`,`dateOfBirth`,userType)"
 					+"VALUES(?,?,?,?,?,?)");
 
 		}
+		
 		catch(SQLException e){
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	public int setrecruiter(String company,String email)
+	{
+		int result1=0;
+		int id=0;
+
+			try{
+//				Statement st= con.createStatement(); 
+			selectUser= conn.prepareStatement(
+						"Select id from `user` where email_id=?");
+			selectUser.setString(1,email);
+			ResultSet rs=selectUser.executeQuery(); 
+			if(rs.next()) 
+				id= rs.getInt("id");
+
+			
+			insertrecruiter= conn.prepareStatement(
+					"INSERT INTO `recruiter`"
+					+"(id,company)"
+					+"VALUES(?,?)");
+			
+			insertrecruiter.setInt(1,id);
+			insertrecruiter.setString(2,company);
+			result1 = insertrecruiter.executeUpdate();
+		//}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+			return result1;
+			
+	}
+	
+	
 	
 	public int setJobs(String name, String password, String email_id, String gender, java.sql.Date dob, String userType){
 		int result =0;
@@ -57,17 +98,18 @@ public class Jobs{
 		        e.printStackTrace();
 		    }
 			
-			System.out.println("VAlue" + userType);
-			
-			insertjob.setString(1,name);
-			insertjob.setString(2,password);
-			insertjob.setString(3,email_id);
-			insertjob.setString(4,gender);
-			insertjob.setDate(5,dob);
-			insertjob.setString(6,userType);
-			result = insertjob.executeUpdate();
-			
+			System.out.println("Value" + userType);		
+
+			insertuser.setString(1,name);
+			insertuser.setString(2,password);
+			insertuser.setString(3,email_id);
+			insertuser.setString(4,gender);
+			insertuser.setDate(5,dob);
+			insertuser.setString(6,userType);
+			result = insertuser.executeUpdate();
+						
 		}
+		
 		catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -77,7 +119,7 @@ public class Jobs{
 }
 %>
 <%
-int result =0;
+int result =0,result1=0;
 String name = new String();
 String password = new String();
 String email_id = new String();
@@ -85,7 +127,9 @@ String gender = new String();
 String userType = new String();
 SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy");
 java.sql.Date dateofbirth=null;
-
+String phoneNumber="";
+String location="";
+String company="";
 
 
 if (request.getParameter("name")!=null){
@@ -112,30 +156,66 @@ if (request.getParameter("userType")!=null){
 	System.out.println("value"+userType);
 }
 
+if (request.getParameter("Location")!=null){
+	location = request.getParameter("Location");
+}
+
+if (request.getParameter("company")!=null){
+	company = request.getParameter("company");
+}
+
+if (request.getParameter("Phone")!=null){
+	phoneNumber = request.getParameter("Phone");
+}
+
 Jobs jobs=new Jobs();
 
-result = jobs.setJobs(name,password,email_id,gender,dateofbirth,userType);
+result= jobs.setJobs(name,password,email_id,gender,dateofbirth,userType);
+
+if(userType.equals("Recruiter"))
+{
+	result1= jobs.setrecruiter(company,email_id);
+
+}
 
 %>
 <%
-if(request.getParameter("userType").equals("JobSeeker")) {
-        %>
-        <%@include  file="user.html" %>
-        <%
-            }
+/*		if(userType.equals("JobSeeker"))
+{
+	insertjobSeeker= conn.prepareStatement(
+			"INSERT INTO `jobSeeker`"
+			+"(resume,phoneNumber,location)"
+			+"VALUES(?,?)");
+
+	//insertjobSeeker.setBlob(1,resume);
+	insertjobSeeker.setString(2,phoneNumber);
+	insertjobSeeker.setString(3,location);
+
+}
+
+else
+{
+	*/
 %>
-<% 		if(request.getParameter("userType").equals("Recruiter")) {
-			%>
-        <%@include  file="recruiter.html" %>
-        <%
-            }
-%>
- <%       if(request.getParameter("userType").equals("Admin")) {
-        %>
-        <%@include  file="admin.html" %>
-        <%
-            }
-         %>
+<% if(request.getParameter("userType").equals("JobSeeker")) { 
+	
+	response.sendRedirect("user.jsp?email="+email_id) ;
+	
+    }
+	else if(request.getParameter("userType").equals("Recruiter")) {
+		response.sendRedirect("recruiter.jsp?email="+email_id) ;
+	}
+	else if(request.getParameter("userType").equals("Admin"))
+    {
+		response.sendRedirect("admin.jsp?email="+email_id) ;
+    }
+    %>
+    
+
+ 
+      
         
 </body>
 </html>
+
+
