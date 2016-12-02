@@ -10,45 +10,46 @@
 function Checkjobseeker() {
     if (document.getElementById('jCheck').checked) {
         document.getElementById('jYes').style.visibility = 'visible';
-        document.getElementById('rYes').style.visibility = 'hidden';}
+        document.getElementById('rYes').style.visibility = 'hidden';
+        document.getElementById('comp').value="";
+        }
    
 }
  function Checkrecruiter() {
     if (document.getElementById('rCheck').checked) {
         document.getElementById('rYes').style.visibility = 'visible';
         document.getElementById('jYes').style.visibility = 'hidden';
+        document.getElementById('loc').value="";
+        document.getElementById('ph').value="";
     } 
  }
 </script>
 <h2>Registration page</h2>
 
 <form name="jobapp" action="index.jsp" method="POST">
-<p> Please select user type <p>
-<input type="radio" onclick="javascript:Checkjobseeker();" name="userType" value="JobSeeker"  id="jCheck"/>JobSeeker</td>
-<input type="radio" onclick="javascript:Checkrecruiter();" name="userType" value="Recruiter"  id="rCheck"/>Recruiter</td>  
-<hr>
-Name: <input type="text"  name="name" placeholder="Your name"><br><br>
-Password:<input type="password"  name= "password" placeholder = " Enter Password"><br><br>
-Email:<input type="text" value="" name="email_id" ><br><br>
-Gender:
-Male <input type="radio" value="male"  name="gender">
-Female <input type="radio" value="female"  name="gender">
-Other <input type="radio" value="others"  name="gender"><br><br>
-DOB:<input type="text" value=""  name="dateOfBirth" placeholder="DD/MM/YYYY"><br><br>
+	<p> Please select user type <p>
+	<input type="radio" onclick="javascript:Checkjobseeker();" name="userType" value="JobSeeker"  id="jCheck"/>JobSeeker</td>
+	<input type="radio" onclick="javascript:Checkrecruiter();" name="userType" value="Recruiter"  id="rCheck"/>Recruiter</td>  
+	<hr>
+	
+	Name:     <input type="text"  name="name" placeholder="Your name"><br><br>
+	Password: <input type="password"  name= "password" placeholder = " Enter Password"><br><br>
+	Email:    <input type="text" value="" name="email_id" ><br><br>
+	Gender:
+	Male      <input type="radio" value="male"  name="gender">
+	Female    <input type="radio" value="female"  name="gender">
+    Other     <input type="radio" value="others"  name="gender"><br><br>
+	DOB:      <input type="text" value=""  name="dateOfBirth" placeholder="DD/MM/YYYY"><br><br>
 
-<div id="rYes" style="visibility:hidden">
-Company:<input type="text" value="" name="company"><br>
-</div>
+   <div id="rYes" style="visibility:hidden">
+		Company:  <input id="comp" type="text" value="" name="company"><br></div>
 
-<div id="jYes" style="visibility:hidden">
-LOcation:<input type= "text" value="" name="Location"><br>
-Phone:<input type= "text" value="" name="Phone"><br>
-</div>
+	<div id="jYes" style="visibility:hidden">
+ 		Location: <input id="loc" type= "text" value="" name="Location"><br>
+		Phone:    <input id="ph" type= "text" value="" name="Phone"><br></div>
 
-<input type="reset" value="clear" name="clear">
-<input type="submit" value="submit" name="submit">
-
-
+	<input type="reset" value="clear" name="clear">
+	<input type="submit" value="submit" name="submit">
 
 </form>
 
