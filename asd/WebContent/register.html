@@ -26,7 +26,7 @@ function Checkjobseeker() {
 </script>
 <h2>Registration page</h2>
 
-<form name="jobapp" action="index.jsp" method="POST">
+<form name="jobapp" action="index.jsp" method="POST" enctype="multipart/form-data">
 	<p> Please select user type <p>
 	<input type="radio" onclick="javascript:Checkjobseeker();" name="userType" value="JobSeeker"  id="jCheck"/>JobSeeker</td>
 	<input type="radio" onclick="javascript:Checkrecruiter();" name="userType" value="Recruiter"  id="rCheck"/>Recruiter</td>  
@@ -47,7 +47,12 @@ function Checkjobseeker() {
 	<div id="jYes" style="visibility:hidden">
  		Location: <input id="loc" type= "text" value="" name="Location"><br>
 		Phone:    <input id="ph" type= "text" value="" name="Phone"><br></div>
-
+		<table border=1>
+		<tr>
+		<td>Choose File : </td>
+		<td><input type="file" name="file_uploaded" /></td>
+        </tr>
+        </table>
 	<input type="reset" value="clear" name="clear">
 	<input type="submit" value="submit" name="submit">
 

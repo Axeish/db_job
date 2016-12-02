@@ -15,7 +15,7 @@
 	int id =0;
 	String email = new String();
 	PreparedStatement disprec =null;
-	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","root"); 
+	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","Amma@123"); 
 	Statement st= con.createStatement(); 
 	ResultSet rs=st.executeQuery("select * from user where email_id='" + request.getParameter("email") + "'"); 
 	
@@ -55,11 +55,11 @@
 	<%
 	} %>
 	</table>
+
+
 	
 	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Addjob</a>
 
-<form name="applicants" action="applicants.jsp" method="POST">
-<input type="submit" value="View Applicants" name="onsubmit">
-</form>
+
 </body>
 </html>
