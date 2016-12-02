@@ -6,6 +6,9 @@
 <%@page import='java.security.NoSuchAlgorithmException'%>   
 <%@page import='java.text.*'%>       
 <%@ page import="java.sql.*" %>
+<%@ page import="javax.servlet.*" %>
+<%@ page import="java.io.*" %>
+
 <% Class.forName("com.mysql.jdbc.Driver"); %>
 <%@ page import="java.util.Date" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,6 +30,7 @@ public class Jobs{
 	PreparedStatement insertrecruiter =null;
 	PreparedStatement selectUser =null;
 	ResultSet rs=null;
+	ResultSet rs1=null;
 	
 	public Jobs(){
 		try {
@@ -43,6 +47,7 @@ public class Jobs{
 			e.printStackTrace();
 		}
 	}
+	
 	
 	
 	
@@ -116,10 +121,51 @@ public class Jobs{
 		
 		return result;
 	}
+	
+	
+	public int setSeeker(String phno,String loc,InputStream is,String email,int size)
+	{
+		
+		int result2=0;
+		int id1=0;
+
+			try{
+//				Statement st= con.createStatement(); 
+			selectUser= conn.prepareStatement(
+						"Select id from `user` where email_id=?");
+			selectUser.setString(1,email);
+			ResultSet rs=selectUser.executeQuery(); 
+			if(rs.next()) 
+				id1= rs.getInt("id");
+
+			
+			insertjobSeeker= conn.prepareStatement(
+					"INSERT INTO `jobSeeker`"
+					+"(id,resume,phoneNumber,location)"
+					+"VALUES(?,?,?,?)");
+			
+			insertjobSeeker.setInt(1,id1);
+			if (is != null) {
+                // fetches input stream of the upload file for the blob column
+                insertjobSeeker.setBinaryStream(2, is, size);
+            }
+			insertjobSeeker.setString(3,phno);
+			insertjobSeeker.setString(4,loc);
+			result2 = insertjobSeeker.executeUpdate();
+		//}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+			return result2;
+	}
+
 }
 %>
 <%
-int result =0,result1=0;
+
+int result =0,result1=0,result2=0;
+InputStream inputStream = null;
 String name = new String();
 String password = new String();
 String email_id = new String();
@@ -130,6 +176,16 @@ java.sql.Date dateofbirth=null;
 String phoneNumber="";
 String location="";
 String company="";
+
+Part filePart = request.getPart("file_uploaded");
+if (filePart != null) 
+{
+    System.out.println(filePart.getName());
+    System.out.println(filePart.getSize());
+    System.out.println(filePart.getContentType());
+
+    inputStream = filePart.getInputStream();
+}
 
 
 if (request.getParameter("name")!=null){
@@ -168,6 +224,7 @@ if (request.getParameter("Phone")!=null){
 	phoneNumber = request.getParameter("Phone");
 }
 
+
 Jobs jobs=new Jobs();
 
 result= jobs.setJobs(name,password,email_id,gender,dateofbirth,userType);
@@ -178,31 +235,19 @@ if(userType.equals("Recruiter"))
 
 }
 
-%>
-<%
-/*		if(userType.equals("JobSeeker"))
+if(userType.equals("JobSeeker"))
 {
-	insertjobSeeker= conn.prepareStatement(
-			"INSERT INTO `jobSeeker`"
-			+"(resume,phoneNumber,location)"
-			+"VALUES(?,?)");
-
-	//insertjobSeeker.setBlob(1,resume);
-	insertjobSeeker.setString(2,phoneNumber);
-	insertjobSeeker.setString(3,location);
+	result2= jobs.setSeeker(phoneNumber,location,inputStream,email_id,(int)filePart.getSize());
 
 }
 
-else
-{
-	*/
 %>
-<% if(request.getParameter("userType").equals("JobSeeker")) { 
-	
+
+<% 
+if(request.getParameter("userType").equals("JobSeeker")) {
 	response.sendRedirect("user.jsp?email="+email_id) ;
-	
-    }
-	else if(request.getParameter("userType").equals("Recruiter")) {
+}
+else if(request.getParameter("userType").equals("Recruiter")) {
 		response.sendRedirect("recruiter.jsp?email="+email_id) ;
 	}
 	else if(request.getParameter("userType").equals("Admin"))
