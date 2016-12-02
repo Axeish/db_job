@@ -18,9 +18,9 @@
 
 <%!
 public class NewJob{
-	String URL = "jdbc:mysql://localhost:3306/jona";
+	String URL = "jdbc:mysql://localhost:3306/jobPortal";
 	String USERNAME="root";
-	String PASS= "root";
+	String PASS= "Amma@123";
 	Connection conn=null;
 	PreparedStatement insertnjob =null;
 	ResultSet rs=null;

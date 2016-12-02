@@ -58,7 +58,7 @@
 
 
 	
-	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Addjob</a>
+	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Search job</a>
 
 
 </body>
