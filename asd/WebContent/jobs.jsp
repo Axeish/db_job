@@ -15,6 +15,7 @@
 	Class.forName("com.mysql.jdbc.Driver"); %>
 	<%@ page import="java.util.Date" %>  
 
+
 <%!
 public class NewJob{
 	String URL = "jdbc:mysql://localhost:3306/jona";
@@ -104,6 +105,7 @@ NewJob jobs=new NewJob();
 result = jobs.setJobs(jid, postedby,title, datePosted,jobDetail,jobLocation);
 }
 %>
+
 
 
 
