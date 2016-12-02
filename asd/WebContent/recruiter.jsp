@@ -13,6 +13,7 @@
 	<%
 	Class.forName("com.mysql.jdbc.Driver"); 
 	int id =0;
+	String email = new String();
 	PreparedStatement disprec =null;
 	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","root"); 
 	Statement st= con.createStatement(); 
@@ -22,13 +23,14 @@
 	if(rs.next()) 
 	{  
 		id = rs.getInt("id");
+		email = rs.getString("email_id");
 		%>
 	<h3> Hi, <%= rs.getString("name") %></h3><br>
 		<p> Welcome to JobGrabber <p><br><hr>
 	<h5>Your profile details:</h5>
 	<table>
 	<tr><td>Name: </td> <td><%= rs.getString("name") %></td></tr>
-	<tr><td>Email: </td> <td><%= rs.getString("email_id") %></td></tr>
+	<tr><td>Email: </td> <td><%=email  %></td></tr>
 	<tr><td>Gender: </td> <td><%= rs.getString("gender") %></td></tr>
 	<tr><td>Date of Birth: </td> <td><%= rs.getString("dateofbirth") %></td></tr>
 	
@@ -54,7 +56,7 @@
 	} %>
 	</table>
 	
-	<a href="jobs.jsp?id=<%=id%>">Addjob</a>
+	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Addjob</a>
 
 <form name="applicants" action="applicants.jsp" method="POST">
 <input type="submit" value="View Applicants" name="onsubmit">
