@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Registration page</h2>
+
+<form name="jobapp" action="index.jsp" method="POST">
+<p> Please select user type <p>
+<input type="radio" name="userType" value="JobSeeker" /> JobSeeker</td>
+<input type="radio" name="userType" value="Recruiter" /> Recruiter</td>  
+<hr>
+Name: <input type="text"  name="name" placeholder="Your name"><br><br>
+Password:<input type="password"  name= "password" placeholder = " Enter Password"><br><br>
+Email:<input type="text" value="" name="email_id" ><br><br>
+Gender:
+Male <input type="radio" value="male"  name="gender">
+Female <input type="radio" value="female"  name="gender">
+Other <input type="radio" value="others"  name="gender"><br><br>
+DOB:<input type="text" value=""  name="dateOfBirth" placeholder="DD/MM/YYYY"><br><br>
+<input type="reset" value="clear" name="clear">
+<input type="submit" value="submit" name="submit">
+
+</form>
+
+</body>
+</html>
