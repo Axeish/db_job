@@ -15,7 +15,7 @@ String email=request.getParameter("email");
 session.putValue("email",email); 
 String password=request.getParameter("password"); 
 Class.forName("com.mysql.jdbc.Driver"); 
-java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","root"); 
+java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","Amma@123"); 
 Statement st= con.createStatement(); 
 ResultSet rs=st.executeQuery("select * from user where email_id='" + email + "'"); 
 if(rs.next()) 

@@ -12,7 +12,7 @@
 	<%@ page import="java.util.*"%>
 	<%
 	Class.forName("com.mysql.jdbc.Driver"); 
-	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","root"); 
+	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","Amma@123"); 
 	Statement st= con.createStatement();
 	int id=0;
 	ResultSet rs=st.executeQuery("select * from user where email_id='" + request.getParameter("email") + "'"); 
@@ -37,7 +37,7 @@
 	%>
 <%	
 PreparedStatement selectUser= con.prepareStatement(
-		"Select * from `user` where email_id=?");
+		"Select * from `jobseeker` where id=?");
 selectUser.setInt(1,id);
 ResultSet rs1=selectUser.executeQuery(); 
 if(rs1.next()) 
@@ -51,5 +51,14 @@ if(rs1.next())
 	<%	
 	}
 	%>
+	<form name="jobapp" action="searchJobs.jsp?id=<%=id %>" method="POST">
+	<table border=1>
+		<tr>
+		<td>Search Jobs : </td>
+		<td><input type="text" name="searchJobs" /></td>
+		<td><input type="submit" name="submit" value="search" /></td>
+        </tr>
+        </table>
+</form>
 </body>
 </html>

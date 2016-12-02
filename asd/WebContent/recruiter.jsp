@@ -58,8 +58,13 @@
 
 
 	
+
+	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Search job</a>
+
+
 	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Addjob</a>
     <a href="applicants.jsp?id=<%=id%>&email=<%=email%>">View My Applicants</a>
+
 
 </body>
 </html>
