@@ -59,7 +59,7 @@
 
 	
 
-	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Search job</a>
+	<a href="index.html">logout</a>
 
 
 	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Addjob</a>

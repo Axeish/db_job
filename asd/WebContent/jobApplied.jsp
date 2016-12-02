@@ -18,7 +18,7 @@
 public class JobApplied{
 	String URL = "jdbc:mysql://localhost:3306/jobportal";
 	String USERNAME="root";
-	String PASS= "Amma@123";
+	String PASS= "root";
 	Connection conn=null;
 	PreparedStatement insertjobs =null;
 	ResultSet rs=null;
@@ -50,7 +50,10 @@ public class JobApplied{
 			insertjobs.setInt(1,seekerId);
 			insertjobs.setInt(2,jobid);
 			insertjobs.setInt(3,postedById);
-			result1 = insertjobs.executeUpdate();
+			System.out.println(seekerId);
+			System.out.println(jobid);
+			System.out.println(postedById);
+;			result1 = insertjobs.executeUpdate();
 		}
 		catch(SQLException e){
 			e.printStackTrace();
@@ -68,7 +71,8 @@ int id = 0;
 int postedBy = 0;
 int jobid = 0;
 
-
+String email= new String();
+email = request.getParameter("email");
 
 if (request.getParameter("id")!=null){
 	id = Integer.parseInt(request.getParameter("id")); 
@@ -87,16 +91,10 @@ result= jobs.setjobs(id,jobid,postedBy);
 
 %>
 <h1>YOU HAVE SUCCESSFULLY APPLIED!!</h1>
-<form name="jobapp" action="searchJobs.jsp?id=<%=id %>" method="POST">
-	<table border=1>
-		<tr>
-		<td>Back TO Search : </td>
-		<td><input type=hidden name="searchJobs" value="" /></td>
-		<td><input type="submit" name="submit" value="search" /></td>
-        </tr>
-        </table>
-</form>
-	</body>
+<a href="searchJobs.jsp?id=<%=id%>&email=<%=email%>">Search more jobs</a>
+<a href="user.jsp?email=<%=email%>">GoBackHome</a><br>
+
+</body>
 </html>
 
 

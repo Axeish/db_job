@@ -11,6 +11,8 @@
 <%@ page import="java.sql.*"%>
 	<%@ page import="javax.sql.*"%>
 	<%@ page import="java.util.*"%>
+<%@ page 	import="java.io.InputStream" %>
+<%@ page import="java.io.OutputStream"%>
 	<%
 	Class.forName("com.mysql.jdbc.Driver"); 
 	int id =0;
@@ -29,7 +31,7 @@
     	
    %> 	<%
    dispall= con.prepareStatement(
-    			"select * from jobs where postedBy= ?");
+    			"select j.id,j.title,j.datePosted,u.name,js.resume,js.location from jobs j, user u,jobSeeker js,jobApplication ja where postedBy= ? and j.postedBy =ja.accessedBy and j.id=ja.applies and js.id=ja.appliedBy and u.id=js.id order by ja.applies" );
     	System.out.println(id);
     	dispall.setInt(1,id);
     	ResultSet rsap=dispall.executeQuery(); 
@@ -39,12 +41,29 @@
     	<%
     	while(rsap.next()) 
     	{ 
+    	 String fileName = rsap.getString("resume");
+         Blob blob = rsap.getBlob("resume");
+         byte barr[]=blob.getBytes(1,(int)blob.length());
+         FileOutputStream fout=new FileOutputStream("d:\\FILE_NAME.jpg");
+         fout.write(barr);
 
-    	%>
+         fout.close();
+         }//end of if
+         System.out.println("ok");
+
+         con.close();
+         catch(Exception e)
+         {
+        	 e.printStackTrace();
+         }
+         %>
     	<tr>
     		<td><%= rsap.getInt("id") %></td>
     		<td><%= rsap.getString("title") %></td>
     		<td><%= rsap.getString("datePosted") %></td>
+    		<td><%= rsap.getString("name") %></td>
+    		<td><%= rsap.getBlob("resume") %></td>
+    		<td><%= rsap.getString("location") %></td>
     		    	
     	</tr>
     	

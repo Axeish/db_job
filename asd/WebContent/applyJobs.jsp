@@ -18,10 +18,12 @@
 <%@ page import="java.util.*"%>
 <%
 	Class.forName("com.mysql.jdbc.Driver"); 
-	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","Amma@123"); 
+	java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jobportal","root","root"); 
 
 	Statement st= con.createStatement();
 	int id=0;
+	String email= new String();
+	email = request.getParameter("email");
 	ResultSet rs=st.executeQuery("select * from jobs where id ='" + request.getParameter("Jobid") + "'"); 
 	if(rs.next()) 
 	{ 
@@ -42,7 +44,7 @@
 	</div>
 	
 	<br><br>
-	<a href="jobApplied.jsp?id=<%=request.getParameter("id")%>&jobid=<%=request.getParameter("Jobid") %>&postedBy=<%=request.getParameter("postedBy")%>&searchJobs=<%=request.getParameter("searchJobs")%>">
+	<a href="jobApplied.jsp?id=<%=request.getParameter("id")%>&jobid=<%=request.getParameter("Jobid") %>&postedBy=<%=request.getParameter("postedBy")%>&email=<%=email%>">
 	APPLY
 	</a>
 	
