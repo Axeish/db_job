@@ -53,11 +53,16 @@
 	<%
 	} %>
 	</table>
+<<<<<<< HEAD
 	<form name="jobs" action="jobs.jsp?id="+<%=id %>  method="POST">
 	
 		<input type="submit" value="Add Jobs" name="submit"><br>
 	</form>
 	<a href="jobs.jsp?id=<%=id%>>Go!</a>
+=======
+	
+	<a href="jobs.jsp?id=<%=id%>">Addjob</a>
+>>>>>>> 296a324bc9c81dd4e74760cb7a58b5df73a54883
 
 <form name="applicants" action="applicants.jsp" method="POST">
 <input type="submit" value="View Applicants" name="onsubmit">

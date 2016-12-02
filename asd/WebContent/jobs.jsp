@@ -11,7 +11,11 @@ ADD JOB!!
 
 <%String id = request.getParameter("recid");
 %>
+<<<<<<< HEAD
 <%=id %>
+=======
+${id }
+>>>>>>> 296a324bc9c81dd4e74760cb7a58b5df73a54883
 
 </body>
 </html>
