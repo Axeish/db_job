@@ -14,6 +14,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -106,7 +107,7 @@ public class Jobs{
 			System.out.println("Value" + userType);		
 
 			insertuser.setString(1,name);
-			insertuser.setString(2,password);
+			insertuser.setString(2,md5);
 			insertuser.setString(3,email_id);
 			insertuser.setString(4,gender);
 			insertuser.setDate(5,dob);
@@ -123,7 +124,7 @@ public class Jobs{
 	}
 	
 	
-	public int setSeeker(String phno,String loc,InputStream is,String email,int size)
+	public int setSeeker(String phno,String loc,String email,String resume_url)
 	{
 		
 		int result2=0;
@@ -141,14 +142,14 @@ public class Jobs{
 			
 			insertjobSeeker= conn.prepareStatement(
 					"INSERT INTO `jobSeeker`"
-					+"(id,resume,phoneNumber,location)"
+					+"(id,resume_url,phoneNumber,location)"
 					+"VALUES(?,?,?,?)");
 			
 			insertjobSeeker.setInt(1,id1);
-			if (is != null) {
+			
                 // fetches input stream of the upload file for the blob column
-                insertjobSeeker.setBinaryStream(2, is, size);
-            }
+                insertjobSeeker.setString(2, resume_url);
+           
 			insertjobSeeker.setString(3,phno);
 			insertjobSeeker.setString(4,loc);
 			result2 = insertjobSeeker.executeUpdate();
@@ -175,17 +176,9 @@ SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy");
 java.sql.Date dateofbirth=null;
 String phoneNumber="";
 String location="";
+String resume_url="";
 String company="";
 
-Part filePart = request.getPart("file_uploaded");
-if (filePart != null) 
-{
-    System.out.println(filePart.getName());
-    System.out.println(filePart.getSize());
-    System.out.println(filePart.getContentType());
-
-    inputStream = filePart.getInputStream();
-}
 
 
 if (request.getParameter("name")!=null){
@@ -224,10 +217,14 @@ if (request.getParameter("Phone")!=null){
 	phoneNumber = request.getParameter("Phone");
 }
 
+if (request.getParameter("resume_url")!=null){
+	resume_url = request.getParameter("resume_url");
+}
 
 Jobs jobs=new Jobs();
 
 result= jobs.setJobs(name,password,email_id,gender,dateofbirth,userType);
+
 
 if(userType.equals("Recruiter"))
 {
@@ -237,13 +234,24 @@ if(userType.equals("Recruiter"))
 
 if(userType.equals("JobSeeker"))
 {
-	result2= jobs.setSeeker(phoneNumber,location,inputStream,email_id,(int)filePart.getSize());
+	result2= jobs.setSeeker(phoneNumber,location,email_id,resume_url);
 
 }
 
 %>
 
 <% 
+if(result==0 ){
+	%>
+	<script type="text/javascript">
+	function alertName(){
+	alert("Please enter unique email id and enter all fields");
+	} 
+	</script><% 
+
+//	out.println ( "Please enter unique email id and enter all fields" );
+}
+else{
 if(request.getParameter("userType").equals("JobSeeker")) {
 	response.sendRedirect("user.jsp?email="+email_id) ;
 }
@@ -254,12 +262,13 @@ else if(request.getParameter("userType").equals("Recruiter")) {
     {
 		response.sendRedirect("admin.jsp?email="+email_id) ;
     }
+}
     %>
     
 
  
       
-        
+ <script type="text/javascript"> window.onload = alertName; </script>       
 </body>
 </html>
 

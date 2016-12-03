@@ -1,11 +1,14 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript">
+
+
+	<script type="text/javascript">
 
 function Checkjobseeker() {
     if (document.getElementById('jCheck').checked) {
@@ -24,36 +27,40 @@ function Checkjobseeker() {
     } 
  }
 </script>
-<h2>Registration page</h2>
 
-<form name="jobapp" action="index.jsp" method="POST" enctype="multipart/form-data">
-	<p> Please select user type <p>
-	<input type="radio" onclick="javascript:Checkjobseeker();" name="userType" value="JobSeeker"  id="jCheck"/>JobSeeker</td>
-	<input type="radio" onclick="javascript:Checkrecruiter();" name="userType" value="Recruiter"  id="rCheck"/>Recruiter</td>  
-	<hr>
+
+	<h2>Registration page</h2>
+
+	<form name="jobapp" action="index.jsp" method="POST" enctype="multipart/form-data">
+		<h2> Please select user type </h2>
+		<input type="radio" onclick="javascript:Checkjobseeker();" name="userType" value="JobSeeker"  id="jCheck"/>JobSeeker
+		<input type="radio" onclick="javascript:Checkrecruiter();" name="userType" value="Recruiter"  id="rCheck"/>Recruiter  
+		<hr>
 	
-	Name:     <input type="text"  name="name" placeholder="Your name"><br><br>
-	Password: <input type="password"  name= "password" placeholder = " Enter Password"><br><br>
-	Email:    <input type="text" value="" name="email_id" ><br><br>
-	Gender:
-	Male      <input type="radio" value="male"  name="gender">
-	Female    <input type="radio" value="female"  name="gender">
-    Other     <input type="radio" value="others"  name="gender"><br><br>
-	DOB:      <input type="text" value=""  name="dateOfBirth" placeholder="DD/MM/YYYY"><br><br>
+		<table>	
 
+		<tr><td width="30%">Name:</td>   <td width="70%"><input type="text"  name="name" placeholder="Your name"></td></tr>
+		<tr><td>Password:</td>			 <td><input type="password"  name= "password" placeholder = " Enter Password"></td></tr>
+		<tr><td>Email:</td>              <td><input type="email" value="" name="email_id" ></td></tr>
+		<tr><td>Gender: </td><td>
+	     Male<input type="radio" value="male"  name="gender"><br>
+	     Female<input type="radio" value="female"  name="gender"><br>
+         Other<input type="radio" value="others"  name="gender"></td></tr>
+<tr><td>	DOB:   </td><td>   <input type="text" value=""  name="dateOfBirth" placeholder="DD/MM/YYYY"></td></tr>
+</table>
    <div id="rYes" style="visibility:hidden">
-		Company:  <input id="comp" type="text" value="" name="company"><br></div>
+   <table><tr><td width="30%">
+		Company: </td><td width="70%"> <input id="comp" type="text" value="" name="company"><br>
+		</td></tr></table></div>
 
 	<div id="jYes" style="visibility:hidden">
- 		Location: <input id="loc" type= "text" value="" name="Location"><br>
-		Phone:    <input id="ph" type= "text" value="" name="Phone"><br>
-		<table border=1>
-		<tr>
-		<td>Choose File : </td>
-		<td><input type="file" name="file_uploaded" /></td>
+	 <table id="addtop"><tr><td width = "30%">
+ 		Location: </td><td width = "70%"><input id="loc" type= "text" value="" name="Location"><br></td></tr>
+	<tr><td>	Phone:   </td><td> <input id="ph" type= "text" value="" name="Phone"><br></td></tr>
+	<tr><td>	Profile URL :</td><td> 
+		<input type="text" name="resume_url" />
 
-        </tr>  
-        </table></div>
+        	</td></tr></table></div>
 
 	<input type="reset" value="clear" name="clear">
 	<input type="submit" value="submit" name="submit">

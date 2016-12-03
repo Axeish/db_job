@@ -3,10 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+<h2>Adding new jobs</h2>
+<h4>Please fill the details of the new job</h4><hr>
 <%@ page import="java.sql.*"%>
 	<%@ page import="javax.sql.*"%>
 	<%@ page import="java.util.*"%>
@@ -43,13 +46,7 @@ public class NewJob{
 	
 	public int setJobs(int id, int postedby, String title, java.sql.Date datePosted, String jobDetail, String jobLocation){
 		int result =0;
-		System.out.println(id);
-		System.out.println(postedby);
-		System.out.println(title);
-		System.out.println(datePosted);
-		System.out.println(jobDetail);
-		System.out.println(jobLocation);
-		System.out.println("id");
+	
 		try{	
 			insertnjob.setInt(1,id);
 			insertnjob.setInt(2,postedby);
@@ -105,6 +102,10 @@ if (request.getParameter("title")!=null){
 NewJob jobs=new NewJob();
 
 result = jobs.setJobs(jid, postedby,title, datePosted,jobDetail,jobLocation);
+if (result==1){
+	
+%>	<h2> Successfully added new job </h2> <%
+}
 }
 %>
 
@@ -112,16 +113,20 @@ result = jobs.setJobs(jid, postedby,title, datePosted,jobDetail,jobLocation);
 
 
      <form name="jobs" action="jobs.jsp?id=<%=postedby%>&email=<%=email_id %>" method="POST">
-    JobId:     <input type="text"  name="jid" ><br><br>
-	Title: <input type="text"  name= "title" ><br><br>
-	DatePosted:    <input type="text" value="" name="datePosted" ><br><br>
-	JobDetail: <textarea name="jobDetails">Enter text here...</textarea><br><br>
-	Location:    <input type="text" value="" name="jobLocations" ><br><br>
+     
+     <table><tr><td width="30%">JobId</td><td width="70%"><input type="number"  name="jid" ></td></tr>
+     <tr><td >Title</td><td width="70%"><input type="text"  name= "title" ></td></tr>
+     <tr><td ">DatePosted</td><td width="70%"><input type="text" value="" name="datePosted" ></td></tr>
+     <tr><td >JobDetail</td><td width="70%" height="200px"><textarea rows="9" cols="30" name="jobDetails"></textarea></td></tr>
+     <tr><td >Location</td><td width="70%"><input type="text" value="" name="jobLocations" ><br><br></td></tr>
+    	
+	</table>
 		<input type="reset" value="clear" name="clear">
 	<input type="submit" value="submit" name="submit1">
 
-</form>
-	<a href="recruiter.jsp?email=<%=email_id%>">GoBackHome</a><br>
+</form><br><br>
+	<a href="recruiter.jsp?email=<%=email_id%>">GoBackHome</a><br><br>
 	   <a href="applicants.jsp?id=<%=postedby%>&email=<%=email_id%>">View all Applicants of jobs posted by me </a>
+	    
 </body>
 </html>

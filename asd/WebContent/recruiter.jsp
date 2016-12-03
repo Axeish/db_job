@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -25,8 +26,8 @@
 		id = rs.getInt("id");
 		email = rs.getString("email_id");
 		%>
-	<h3> Hi, <%= rs.getString("name") %></h3><br>
-		<p> Welcome to JobGrabber <p><br><hr>
+	<h2> Hi, <%= rs.getString("name") %></h2>
+		<h4> Welcome to JobGrabber <h4><br><hr>
 	<h5>Your profile details:</h5>
 	<table>
 	<tr><td>Name: </td> <td><%= rs.getString("name") %></td></tr>
@@ -57,13 +58,13 @@
 	</table>
 
 
-	
+	<br>
 
-	<a href="index.html">logout</a>
+	<a href="index.html">Logout</a><br><br>
 
 
-	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Addjob</a>
-    <a href="applicants.jsp?id=<%=id%>&email=<%=email%>">View My Applicants</a>
+	<a href="jobs.jsp?id=<%=id%>&email=<%=email%>">Add new job</a><br><br>
+    <a href="applicants.jsp?id=<%=id%>&email=<%=email%>">View My Applicants</a><br><br>
 
 
 </body>

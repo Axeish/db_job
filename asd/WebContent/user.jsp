@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -24,15 +25,15 @@
 		email = rs.getString("email_id");
 		%>
 	<h3> Hi, <%= rs.getString("name") %></h3><br>
-		<p> Welcome to JobGrabber <p><br><hr>
-	<h5>Your profile details:</h5>
+		<h2> Welcome to JobGrabber <h2><br><hr>
+	<h2>Your profile details:</h2>
 	<table>
-	<tr><td>Name: </td> <td><%= rs.getString("name") %></td></tr>
-	<tr><td>Email: </td> <td><%= email %></td></tr>
-	<tr><td>Gender: </td> <td><%= rs.getString("gender") %></td></tr>
-	<tr><td>Date of Birth: </td> <td><%= rs.getString("dateofbirth") %></td></tr>
+	<tr><td width="30%" class="tith">Name</td> <td width="70%"><%= rs.getString("name") %></td></tr>
+	<tr><td class="tith">Email </td> <td><%= email %></td></tr>
+	<tr><td class="tith">Gender </td> <td><%= rs.getString("gender") %></td></tr>
+	<tr><td class="tith">Date of Birth </td> <td><%= rs.getString("dateofbirth") %></td></tr>
 	
-	</table>	
+		
 	
 	<%	
 	}
@@ -47,15 +48,16 @@ if(rs1.next())
 	{ 
 
 	%>
-	<table>
-	<tr><td>Phone: </td> <td><%= rs1.getString("phoneNumber") %></td></tr>
-	<tr><td>Location: </td> <td><%= rs1.getString("location") %></td></tr>
+	
+	<tr><td class="tith">Phone </td> <td><%= rs1.getString("phoneNumber") %></td></tr>
+	<tr><td class="tith">Location </td> <td><%= rs1.getString("location") %></td></tr>
+	<tr><td class="tith">Profile url </td> <td><%= rs1.getString("resume_url") %></td></tr>
 	</table>
 	<%	
 	}
 	%>
-	<a href="searchJobs.jsp?id=<%=id%>&email=<%=email%>">Search job</a>
-	<a href="index.html">logout</a>
+	<a href="searchJobs.jsp?id=<%=id%>&email=<%=email%>">Search job</a><br><br>
+	<a href="index.html">Logout</a>
 	
 </body>
 </html>

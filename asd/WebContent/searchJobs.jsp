@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -30,12 +31,13 @@
 
 	%>
 	<table>
-	<tr><td>TITLE: </td> <td>  <%= rs.getString("title") %></td></tr>
+	<tr><td width="30%">TITLE: </td> <td width="70%">  <%= rs.getString("title") %></td></tr>
 	<tr><td>Date Posted: </td> <td><%= rs.getString("datePosted") %></td></tr>
 	<tr><td>Location: </td> <td><%= rs.getString("jobLocation") %></td></tr>
-	<tr><td><a href="applyJobs.jsp?id=<%=request.getParameter("id")%>&Jobid=<%=id%>&postedBy=<%=postedBy%>&email=<%=email%>">
-	view job</a></td></tr>
+	
 	</table>
+	<a href="applyJobs.jsp?id=<%=request.getParameter("id")%>&Jobid=<%=id%>&postedBy=<%=postedBy%>&email=<%=email%>">
+	view job</a><br><br><br>
 	<%	
 	}
 	%>
